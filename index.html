@@ -69,7 +69,7 @@
 const CONFIG = {
     numeroTI: "522211553765",
     hoteles: { "Holy": "Holiday Inn Express", "Presidente": "Presidente Intercontinental" },
-    areas: {
+   areas: {
     "recepcion": "1234",
     "ama de llaves": "2222",
     "sistemas": "0000",
@@ -82,19 +82,7 @@ const CONFIG = {
     "contabilidad": "9999"
 }
 };
-function aplicarTema(){
-    if(contexto.hotel === "Holy"){
-        // Holiday Inn
-        document.documentElement.style.setProperty('--primary', '#0d47a1');
-        document.documentElement.style.setProperty('--primary-light', '#1976d2');
-        document.documentElement.style.setProperty('--accent', '#00c853');
-    } else {
-        //  Presidente
-        document.documentElement.style.setProperty('--primary', '#3e2723');
-        document.documentElement.style.setProperty('--primary-light', '#6d4c41');
-        document.documentElement.style.setProperty('--accent', '#d4af37');
-    }
-}
+
 /* 📚 ÁRBOL DE SOLUCIONES */
 const SOLUCIONES = {
     "Internet": [
@@ -159,18 +147,14 @@ function elegirHotel() {
 function setHotel(h) {
     guardarPaso(elegirHotel);
     contexto.hotel = h;
-
-    aplicarTema(); // 👈 APLICA COLORES
-
     msg(`Ubicación establecida en: ${CONFIG.hoteles[h]}`, "user");
     msg("¿A qué área perteneces?");
-    
     const bts = Object.keys(CONFIG.areas).map(a => 
         `<button class="action-btn" onclick="acceder('${a}')">${a.toUpperCase()}</button>`
     ).join("");
-    
     menu.innerHTML = `<div class="buttons">${bts}</div>`;
 }
+
 function acceder(area) {
     guardarPaso(() => setHotel(contexto.hotel));
     contexto.area = area;
